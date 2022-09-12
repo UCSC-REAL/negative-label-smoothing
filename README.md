@@ -62,17 +62,16 @@ In experiments, we formulate GLS as  ``wa * Vanilla Loss + wb * GLS``.
 * --wb: the weight of GLS (default is 1)
 * --smooth_rate: the smooth rate in GLS
 
-
 ## Citation
 
 If you use our code, please cite the following paper:
 
 ```
-@article{wei2021understanding,
-  title={Understanding Generalized Label Smoothing when Learning with Noisy Labels},
-  author={Wei, Jiaheng and Liu, Hangyu and Liu, Tongliang and Niu, Gang and Liu, Yang},
-  journal={arXiv preprint arXiv:2106.04149},
-  year={2021}
+@inproceedings{Wei2022ToSO,
+  title={To Smooth or Not? When Label Smoothing Meets Noisy Labels},
+  author={Jiaheng Wei and Hangyu Liu and Tongliang Liu and Gang Niu and Yang Liu},
+  booktitle={ICML},
+  year={2022}
 }
 
 ```
