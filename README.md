@@ -25,16 +25,42 @@ def loss_gls(logits, labels, smooth_rate=0.1):
 ```
 
 ## Required Packages & Environment
-**TODO** 
+We recommend readers build an virtual environment and install required packages in ``requirements.txt``.
 
 ## Experiments on synthetic noisy CIFAR dataset
-**TODO** 
+
+### Direct training on CIFAR-10
+For Vanilla Loss and PLS, direct training works better when learning with symmetric noisy labels under noise rate 0.2. Run the code bellow to reproduce our results:
+
+```
+CUDA_VISIBLE_DEVICES=0 python3 main_GLS_direct_train.py --noise_type symmetric --noise_rate 0.2
+```
+### Warm-up with CE loss
+When noise rates are large, warming up with CE loss makes PLS and NLS reaches a better performance. Run the code bellow to generate the warm-up model:
+
+```
+CUDA_VISIBLE_DEVICES=0 python3 main_warmup.py --noise_type symmetric --noise_rate 0.2
+```
+
+After the warming up, proceed with GLS:
+
+```
+CUDA_VISIBLE_DEVICES=0 python3 main_GLS_load.py --noise_type symmetric --noise_rate 0.2
+```
 
 ## Experiments on CIFAR-N dataset
-**TODO** 
+You may want to refer to "[CIFAR-N Github Page](https://github.com/UCSC-REAL/cifar-10-100n)", and modify the file ``loss.py`` by referring to the ``loss_gls`` plug-in implementation specified above.
 
-## Observations
-**TODO** 
+### Details of key arguments:
+
+In experiments, we formulate GLS as  ``wa * Vanilla Loss + wb * GLS``.
+
+* --lr: learning rate
+* --noise_rate: the error rate in symmetric noise model
+* --n_epoch: number of epochs 
+* --wa: the weight of Vanilla Loss (default is 0)
+* --wb: the weight of GLS (default is 1)
+* --smooth_rate: the smooth rate in GLS
 
 
 ## Citation
