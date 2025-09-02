@@ -1,0 +1,104 @@
+[tool.poetry]
+name = "pytorch-gls"
+version = "0.1.0"
+description = "PyTorch implementation of Generalized Label Smoothing (GLS)"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [
+    { include = "data" },
+    { include = "models" },
+    { include = "noise_label" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+torch = "^2.0.0"
+torchvision = "^0.15.0"
+numpy = "^1.21.0"
+matplotlib = "^3.5.0"
+pandas = "^1.3.0"
+scikit-learn = "^1.0.0"
+scikit-image = "^0.19.0"
+seaborn = "^0.11.0"
+tqdm = "^4.60.0"
+pillow = "^8.1.0"
+pyyaml = "^6.0"
+scipy = "^1.7.0"
+networkx = "^2.6.0"
+imageio = "^2.9.0"
+joblib = "^1.0.0"
+requests = "^2.25.0"
+h5py = "^3.1.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.11.0"
+
+[tool.poetry.scripts]
+test = "pytest:main"
+tests = "pytest:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "--cov=data",
+    "--cov=models",
+    "--cov=.",
+    "--cov-report=term-missing",
+    "--cov-report=html:htmlcov",
+    "--cov-report=xml:coverage.xml",
+    "--cov-fail-under=80"
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow running tests"
+]
+
+[tool.coverage.run]
+source = ["data", "models", "."]
+omit = [
+    "tests/*",
+    "*/tests/*",
+    "*/test_*.py",
+    "*/*_test.py",
+    "setup.py",
+    "*/site-packages/*",
+    "*/dist-packages/*",
+    "*/venv/*",
+    "*/.venv/*",
+    "*/virtualenv/*",
+    "*/__pycache__/*",
+    "*/conftest.py"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:"
+]
+show_missing = true
+skip_covered = false
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
